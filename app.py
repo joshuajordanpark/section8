@@ -7,7 +7,6 @@ from security import authenticate, identity as identity_function
 from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList # sqlAlchemy needs this to create tables from the store.py file
-from db import db
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
@@ -52,5 +51,6 @@ api.add_resource(StoreList, '/stores')
 api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__': # if only this file is run as 'main' (not as import)
+    from db import db
     db.init_app(app)
     app.run(port=5000, debug=True)
